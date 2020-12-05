@@ -52,6 +52,9 @@ class MyApp extends StatelessWidget {
           },
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        pageTransitionsTheme: PageTransitionsTheme(builders: {
+          TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
+        }),
       ),
       home: Homescreen(),
     );

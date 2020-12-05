@@ -6,6 +6,7 @@ import 'package:ClockApp/ui/views/home/pages/timer_page.dart';
 import 'package:ClockApp/utils/responsive.dart';
 import 'package:ClockApp/utils/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,15 @@ class _HomescreenState extends State<Homescreen> {
       body: PageView(
         controller: pageController,
         onPageChanged: (index) {
+          SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
+              statusBarIconBrightness: (index == 0 || index == 1)
+                  ? Brightness.light
+                  : Brightness.dark,
+            ),
+          );
+
           page = index;
           setState(() {});
         },

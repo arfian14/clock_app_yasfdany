@@ -1,17 +1,19 @@
 import 'package:ClockApp/data/providers/tick_provider.dart';
 import 'package:ClockApp/data/providers/timezone_provider.dart';
 import 'package:ClockApp/ui/components/clockview.dart';
-import 'package:ClockApp/ui/components/flat_card.dart';
 import 'package:ClockApp/ui/components/item_timezone.dart';
+import 'package:ClockApp/ui/components/options_dialog.dart';
+import 'package:ClockApp/ui/components/question_dialog.dart';
 import 'package:ClockApp/ui/components/ripple_button.dart';
+import 'package:ClockApp/ui/views/timezone/timezone_screen.dart';
 import 'package:ClockApp/utils/responsive.dart';
 import 'package:ClockApp/utils/themes.dart';
+import 'package:ClockApp/utils/tools.dart';
 import 'package:ClockApp/utils/widget_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/standalone.dart' as tz;
 
 class ClockPage extends StatefulWidget {
   ClockPage({Key key}) : super(key: key);
@@ -33,6 +35,13 @@ class _ClockPageState extends State<ClockPage> {
   Widget build(BuildContext context) {
     DateTime dateTime = context.watch<TickProvider>().dateTime;
     List<String> timeZones = context.watch<TimezoneProvider>().timeZones;
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
 
     return Scaffold(
       body: Stack(
@@ -79,14 +88,61 @@ class _ClockPageState extends State<ClockPage> {
                         return ItemTimezone(
                           dateTime: dateTime,
                           timezone: e,
-                          onTap: () {},
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              child: OptionsDialog(
+                                options: [
+                                  "Edit",
+                                  "Hapus",
+                                ],
+                                onOptionSelected: (selected) {
+                                  Navigator.pop(context);
+
+                                  switch (selected) {
+                                    case "Edit":
+                                      Tools.navigatePush(
+                                        context,
+                                        TimezoneScreen(
+                                          timezone: e,
+                                        ),
+                                      );
+                                      break;
+                                    case "Hapus":
+                                      showDialog(
+                                        context: context,
+                                        child: QuestionDialog(
+                                          title: "Hapus Timezone",
+                                          message:
+                                              "Yakin ingin menghapus timezone?",
+                                          onConfirm: () {
+                                            context
+                                                .read<TimezoneProvider>()
+                                                .removeTimezone(e);
+                                            Navigator.pop(context);
+                                          },
+                                          onCancel: () {
+                                            Navigator.pop(context);
+                                          },
+                                          positiveText: "Hapus",
+                                          positiveButtonColor: Themes.red,
+                                        ),
+                                      );
+                                      break;
+                                  }
+                                },
+                              ),
+                            );
+                          },
                         );
                       }).toList(),
                     ),
                     RippleButton(
                       radius: 12.w(context),
                       padding: EdgeInsets.all(22.w(context)),
-                      onTap: () {},
+                      onTap: () {
+                        Tools.navigatePush(context, TimezoneScreen());
+                      },
                       border: Border.all(
                         color: Colors.white,
                         width: 2,

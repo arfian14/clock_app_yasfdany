@@ -25,7 +25,7 @@ class ItemTimezone extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () {},
+          onTap: onTap,
           child: Padding(
             padding: EdgeInsets.all(18.w(context)),
             child: Row(

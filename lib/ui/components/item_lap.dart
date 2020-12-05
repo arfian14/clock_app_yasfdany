@@ -25,6 +25,7 @@ class ItemLap extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
+          borderRadius: BorderRadius.circular(12.w(context)),
           onTap: onTap,
           child: Padding(
             padding: EdgeInsets.all(18.w(context)),

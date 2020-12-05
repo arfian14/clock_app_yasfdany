@@ -218,7 +218,9 @@ class _TimePageState extends State<TimePage> {
                     child: Row(
                       children: [
                         Icon(
-                          Icons.play_arrow_rounded,
+                          isTicking
+                              ? Icons.pause_rounded
+                              : Icons.play_arrow_rounded,
                           size: 32.f(context),
                           color: Colors.white,
                         ),
