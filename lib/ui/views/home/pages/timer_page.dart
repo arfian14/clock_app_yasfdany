@@ -41,6 +41,7 @@ class _TimePageState extends State<TimePage> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
                 colors: [
                   Themes.primary,
                   Themes.lightPrimary,
@@ -49,8 +50,12 @@ class _TimePageState extends State<TimePage> {
             ),
           ),
           SingleChildScrollView(
+            controller: scrollController,
             padding: EdgeInsets.all(24.w(context)),
             child: Container(
+              margin: EdgeInsets.only(
+                bottom: laps.isNotEmpty ? 24.hp(context) : 0,
+              ),
               width: double.infinity,
               child: Column(
                 children: [
@@ -119,6 +124,7 @@ class _TimePageState extends State<TimePage> {
                     itemBuilder: (context, index, animation) {
                       return laps.isNotEmpty
                           ? SizeTransition(
+                              axisAlignment: 1.0,
                               sizeFactor: animation,
                               child: ItemLap(
                                 index: index,
@@ -230,6 +236,13 @@ class _TimePageState extends State<TimePage> {
                     child: RippleButton(
                       onTap: () {
                         context.read<TickTimerProvider>().addLap();
+                        if (laps.length < 4) {
+                          scrollController.animateTo(
+                            scrollController.offset + 56.h(context),
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        }
                       },
                       border: Border.all(
                         width: 2,

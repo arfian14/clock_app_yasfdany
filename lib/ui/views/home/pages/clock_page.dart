@@ -62,6 +62,7 @@ class _ClockPageState extends State<ClockPage> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
                 colors: [
                   Themes.primary,
                   Themes.lightPrimary,
