@@ -1,4 +1,5 @@
 import 'package:ClockApp/data/providers/tick_provider.dart';
+import 'package:ClockApp/data/providers/timezone_provider.dart';
 import 'package:ClockApp/ui/views/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => TickProvider()),
         ChangeNotifierProvider(create: (_) => TickTimerProvider()),
+        ChangeNotifierProvider(create: (_) => TimezoneProvider()),
       ],
       child: MyApp(),
     ),

@@ -1,4 +1,5 @@
 import 'package:ClockApp/data/providers/tick_provider.dart';
+import 'package:ClockApp/data/providers/timezone_provider.dart';
 import 'package:ClockApp/ui/components/clockview.dart';
 import 'package:ClockApp/ui/components/flat_card.dart';
 import 'package:ClockApp/ui/components/item_timezone.dart';
@@ -20,41 +21,19 @@ class ClockPage extends StatefulWidget {
 }
 
 class _ClockPageState extends State<ClockPage> {
-  List<String> timeZones = [
-    "Asia/Jakarta",
-    "Asia/Pontianak",
-    "Asia/Makassar",
-    "Asia/Jayapura",
-  ];
-
-  void setTimezones() async {
-    await SharedPreferences.getInstance().then((prefs) {
-      prefs.setStringList("timezones", timeZones);
-    });
-  }
-
-  void loadTimezones() async {
-    await SharedPreferences.getInstance().then((prefs) {
-      var prefTimezones = prefs.getStringList("timezones");
-      if (prefTimezones != null) {
-        if (prefTimezones.isNotEmpty) {
-          timeZones.clear();
-          timeZones.addAll(prefTimezones);
-          setState(() {});
-        }
-      }
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    loadTimezones();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      context.read<TimezoneProvider>().loadTimezones();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     DateTime dateTime = context.watch<TickProvider>().dateTime;
+    List<String> timeZones = context.watch<TimezoneProvider>().timeZones;
+
     return Scaffold(
       body: Stack(
         children: [

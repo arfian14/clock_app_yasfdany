@@ -129,6 +129,7 @@ class _TimePageState extends State<TimePage> {
                               child: ItemLap(
                                 index: index,
                                 lap: laps[index],
+                                onTap: () {},
                               ),
                             )
                           : Container();
@@ -147,15 +148,16 @@ class _TimePageState extends State<TimePage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 102.h(context)),
                 width: double.infinity,
-                height: 56.h(context),
+                height: 25.hp(context),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
                       Themes.lightPrimary.withOpacity(0),
+                      Themes.lightPrimary.withOpacity(0.9),
+                      Themes.lightPrimary.withOpacity(1),
                       Themes.lightPrimary,
                     ],
                   ),
@@ -234,11 +236,11 @@ class _TimePageState extends State<TimePage> {
                   Container(
                     width: 24.wp(context),
                     child: RippleButton(
-                      onTap: () {
+                      onTap: () async {
                         context.read<TickTimerProvider>().addLap();
-                        if (laps.length < 4) {
-                          scrollController.animateTo(
-                            scrollController.offset + 56.h(context),
+                        if (laps.length == 1) {
+                          await scrollController.animateTo(
+                            scrollController.offset + 138.h(context),
                             duration: Duration(milliseconds: 300),
                             curve: Curves.easeIn,
                           );
