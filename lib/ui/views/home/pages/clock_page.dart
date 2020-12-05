@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:ClockApp/data/providers/tick_provider.dart';
 import 'package:ClockApp/data/providers/timezone_provider.dart';
+import 'package:ClockApp/ui/components/animated_background.dart';
+import 'package:ClockApp/ui/components/animated_wave.dart';
 import 'package:ClockApp/ui/components/clockview.dart';
 import 'package:ClockApp/ui/components/item_timezone.dart';
 import 'package:ClockApp/ui/components/options_dialog.dart';
@@ -46,15 +50,26 @@ class _ClockPageState extends State<ClockPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Themes.primary,
-                  Themes.lightPrimary,
-                ],
+          AnimatedBackground(),
+          Positioned.fill(
+            bottom: 0,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: AnimatedWave(
+                height: 120,
+                speed: 0.9,
+                offset: pi,
+              ),
+            ),
+          ),
+          Positioned.fill(
+            bottom: 0,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: AnimatedWave(
+                height: 220,
+                speed: 1.2,
+                offset: pi / 2,
               ),
             ),
           ),
@@ -88,50 +103,98 @@ class _ClockPageState extends State<ClockPage> {
                         return ItemTimezone(
                           dateTime: dateTime,
                           timezone: e,
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              child: OptionsDialog(
-                                options: [
-                                  "Edit",
-                                  "Hapus",
-                                ],
-                                onOptionSelected: (selected) {
-                                  Navigator.pop(context);
+                          onLongTap: () {
+                            showGeneralDialog(
+                              transitionBuilder:
+                                  (currentContext, a1, a2, widget) {
+                                final curvedValue =
+                                    Curves.easeInOutBack.transform(a1.value) -
+                                        1.0;
+                                return Transform(
+                                  transform: Matrix4.translationValues(
+                                    0.0,
+                                    curvedValue * 300,
+                                    0.0,
+                                  ),
+                                  child: Opacity(
+                                    opacity: a1.value,
+                                    child: OptionsDialog(
+                                      options: [
+                                        "Edit",
+                                        "Hapus",
+                                      ],
+                                      onOptionSelected: (selected) {
+                                        Navigator.pop(context);
 
-                                  switch (selected) {
-                                    case "Edit":
-                                      Tools.navigatePush(
-                                        context,
-                                        TimezoneScreen(
-                                          timezone: e,
-                                        ),
-                                      );
-                                      break;
-                                    case "Hapus":
-                                      showDialog(
-                                        context: context,
-                                        child: QuestionDialog(
-                                          title: "Hapus Timezone",
-                                          message:
-                                              "Yakin ingin menghapus timezone?",
-                                          onConfirm: () {
-                                            context
-                                                .read<TimezoneProvider>()
-                                                .removeTimezone(e);
-                                            Navigator.pop(context);
-                                          },
-                                          onCancel: () {
-                                            Navigator.pop(context);
-                                          },
-                                          positiveText: "Hapus",
-                                          positiveButtonColor: Themes.red,
-                                        ),
-                                      );
-                                      break;
-                                  }
-                                },
-                              ),
+                                        switch (selected) {
+                                          case "Edit":
+                                            Tools.navigatePush(
+                                              context,
+                                              TimezoneScreen(
+                                                timezone: e,
+                                              ),
+                                            );
+                                            break;
+                                          case "Hapus":
+                                            showGeneralDialog(
+                                              transitionBuilder:
+                                                  (currentContext, a1, a2,
+                                                      widget) {
+                                                final curvedValue = Curves
+                                                        .easeInOutBack
+                                                        .transform(a1.value) -
+                                                    1.0;
+                                                return Transform(
+                                                  transform:
+                                                      Matrix4.translationValues(
+                                                    0.0,
+                                                    curvedValue * 300,
+                                                    0.0,
+                                                  ),
+                                                  child: Opacity(
+                                                    opacity: a1.value,
+                                                    child: QuestionDialog(
+                                                      title: "Hapus Timezone",
+                                                      message:
+                                                          "Yakin ingin menghapus timezone?",
+                                                      onConfirm: () {
+                                                        context
+                                                            .read<
+                                                                TimezoneProvider>()
+                                                            .removeTimezone(e);
+                                                        Navigator.pop(context);
+                                                      },
+                                                      onCancel: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      positiveText: "Hapus",
+                                                      positiveButtonColor:
+                                                          Themes.red,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              transitionDuration:
+                                                  Duration(milliseconds: 200),
+                                              barrierDismissible: true,
+                                              barrierLabel: '',
+                                              context: context,
+                                              pageBuilder: (context, animation1,
+                                                  animation2) {},
+                                            );
+
+                                            break;
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                              transitionDuration: Duration(milliseconds: 200),
+                              barrierDismissible: true,
+                              barrierLabel: '',
+                              context: context,
+                              pageBuilder: (context, animation1, animation2) {},
                             );
                           },
                         );

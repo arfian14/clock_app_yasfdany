@@ -46,12 +46,14 @@ class _HomescreenState extends State<Homescreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Themes.primary,
+        unselectedItemColor: Themes.black.withOpacity(0.3),
         onTap: (index) {
           pageController.animateToPage(index,
               duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
         },
-        selectedLabelStyle: Themes(context).primaryBold14,
-        unselectedLabelStyle: Themes(context).black14,
+        selectedLabelStyle: Themes(context).primaryBold12,
+        unselectedLabelStyle: Themes(context).black12,
         currentIndex: page,
         items: [
           BottomNavigationBarItem(

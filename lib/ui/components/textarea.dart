@@ -22,6 +22,7 @@ class TextArea extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final MainAxisAlignment mainAxisAlignment;
   final Color color;
+  final Color textColor;
   final bool enable;
   final bool error;
   final String errorMessage;
@@ -46,6 +47,7 @@ class TextArea extends StatefulWidget {
     this.textCapitalization = TextCapitalization.none,
     this.mainAxisAlignment = MainAxisAlignment.center,
     this.color,
+    this.textColor,
     this.enable = true,
     this.error = false,
     this.autoFocus = false,
@@ -100,16 +102,20 @@ class _TextAreaState extends State<TextArea> {
                     obscureText: widget.secureInput,
                     controller: widget.controller,
                     keyboardType: widget.inputType,
-                    style: TextStyle(fontSize: 14.f(context)),
+                    style: Themes(context).black14.apply(
+                        color: widget.textColor != null
+                            ? widget.textColor
+                            : Themes.black),
                     inputFormatters: widget.inputFormatter,
                     maxLength: widget.maxLenght,
                     cursorColor: Themes.primary,
                     decoration: InputDecoration.collapsed(
                       hintText: widget.hint,
-                      hintStyle: TextStyle(
-                        color: Color(0xff2a2a2a).withOpacity(0.3),
-                        fontSize: 14.f(context),
-                      ),
+                      hintStyle: Themes(context).black14.apply(
+                            color: widget.textColor != null
+                                ? widget.textColor.withOpacity(0.5)
+                                : Themes.black,
+                          ),
                     ),
                   ),
                 ],

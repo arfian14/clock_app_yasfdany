@@ -31,8 +31,8 @@ class _TimePageState extends State<TimePage> {
         context.watch<TickTimerProvider>().listKey;
 
     int milisecond = tick % 1000;
-    int second = tick ~/ 1000;
-    int minutes = second ~/ 60;
+    int second = (tick ~/ 1000) % 60;
+    int minutes = (tick ~/ 1000) ~/ 60;
 
     return Scaffold(
       body: Stack(
@@ -144,26 +144,28 @@ class _TimePageState extends State<TimePage> {
               ),
             ),
           ).addMarginBottom(102.h(context)),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                width: double.infinity,
-                height: 25.hp(context),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Themes.lightPrimary.withOpacity(0),
-                      Themes.lightPrimary.withOpacity(0.9),
-                      Themes.lightPrimary.withOpacity(1),
-                      Themes.lightPrimary,
-                    ],
+          IgnorePointer(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 25.hp(context),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Themes.lightPrimary.withOpacity(0),
+                        Themes.lightPrimary.withOpacity(0.9),
+                        Themes.lightPrimary.withOpacity(1),
+                        Themes.lightPrimary,
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -190,7 +192,7 @@ class _TimePageState extends State<TimePage> {
                         children: [
                           Text(
                             "Reset",
-                            style: Themes(context).whiteBold16,
+                            style: Themes(context).whiteBold14,
                           ).addMarginOnly(
                             left: 6.w(context),
                             right: 6.w(context),
@@ -227,7 +229,7 @@ class _TimePageState extends State<TimePage> {
                         if (isTicking)
                           Text(
                             "Pause",
-                            style: Themes(context).whiteBold16,
+                            style: Themes(context).whiteBold14,
                           ).addMarginOnly(
                             left: 6.w(context),
                             right: 6.w(context),
@@ -261,7 +263,7 @@ class _TimePageState extends State<TimePage> {
                         children: [
                           Text(
                             "Lap",
-                            style: Themes(context).whiteBold16,
+                            style: Themes(context).whiteBold14,
                           ).addMarginOnly(
                             left: 6.w(context),
                             right: 6.w(context),
