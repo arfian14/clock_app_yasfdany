@@ -46,6 +46,7 @@ class _TimezoneScreenState extends State<TimezoneScreen> {
       child: Scaffold(
         backgroundColor: Themes.black.withOpacity(0.96),
         appBar: AppBar(
+          toolbarHeight: 68.h(context),
           brightness: Brightness.dark,
           iconTheme: IconThemeData(
             color: Colors.white.withOpacity(0.7),

@@ -8,6 +8,14 @@ class Themes {
   static Color lightPrimary = Color(0xff31E0E0);
   static Color secondary = Color(0xffED6A5A);
   static Color primaryDisableButton = Color(0xffF2C9D8);
+  static Color blue = Color(0xff4751D7);
+  static Color reddish = Color(0xffFF576B);
+  static Color cyan = Color(0xff00D4E0);
+  static Color orange = Color(0xffFFFF904A);
+  static Color purple = Color(0xff874EDC);
+  static Color blueGrey = Color(0xffA9C8F2);
+  static Color magenta = Color(0xffE92B96);
+
   static Color red = Color(0xffF71735);
   static Color yellow = Color(0xffFFD228);
   static Color grey = Color(0xffF0F0F0);

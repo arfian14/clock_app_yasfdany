@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:ClockApp/data/providers/tick_provider.dart';
 import 'package:ClockApp/data/providers/timezone_provider.dart';
-import 'package:ClockApp/ui/components/animated_background.dart';
+import 'package:ClockApp/ui/components/animated_gradient_background.dart';
 import 'package:ClockApp/ui/components/animated_wave.dart';
 import 'package:ClockApp/ui/components/clockview.dart';
 import 'package:ClockApp/ui/components/item_timezone.dart';
@@ -14,6 +14,7 @@ import 'package:ClockApp/utils/responsive.dart';
 import 'package:ClockApp/utils/themes.dart';
 import 'package:ClockApp/utils/tools.dart';
 import 'package:ClockApp/utils/widget_helper.dart';
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -26,7 +27,7 @@ class ClockPage extends StatefulWidget {
   _ClockPageState createState() => _ClockPageState();
 }
 
-class _ClockPageState extends State<ClockPage> {
+class _ClockPageState extends State<ClockPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -50,7 +51,21 @@ class _ClockPageState extends State<ClockPage> {
     return Scaffold(
       body: Stack(
         children: [
-          AnimatedBackground(),
+          AnimatedGradientBackground(),
+          AnimatedBackground(
+            behaviour: RandomParticleBehaviour(
+              options: ParticleOptions(
+                baseColor: Colors.white,
+                particleCount: 20,
+                spawnMaxSpeed: 100,
+                spawnMinSpeed: 10,
+                minOpacity: 0.1,
+                maxOpacity: 0.2,
+              ),
+            ),
+            vsync: this,
+            child: Container(),
+          ),
           Positioned.fill(
             bottom: 0,
             child: Align(

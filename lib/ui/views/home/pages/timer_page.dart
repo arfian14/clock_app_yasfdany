@@ -8,6 +8,7 @@ import 'package:ClockApp/ui/components/ripple_button.dart';
 import 'package:ClockApp/utils/responsive.dart';
 import 'package:ClockApp/utils/themes.dart';
 import 'package:ClockApp/utils/widget_helper.dart';
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class TimePage extends StatefulWidget {
   _TimePageState createState() => _TimePageState();
 }
 
-class _TimePageState extends State<TimePage> {
+class _TimePageState extends State<TimePage> with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
 
   @override
@@ -167,6 +168,20 @@ class _TimePageState extends State<TimePage> {
               ],
             ),
           ),
+          AnimatedBackground(
+            behaviour: RandomParticleBehaviour(
+              options: ParticleOptions(
+                baseColor: Colors.white,
+                particleCount: 20,
+                spawnMaxSpeed: 100,
+                spawnMinSpeed: 10,
+                minOpacity: 0.1,
+                maxOpacity: 0.2,
+              ),
+            ),
+            vsync: this,
+            child: Container(),
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -176,8 +191,16 @@ class _TimePageState extends State<TimePage> {
                   Container(
                     width: 24.wp(context),
                     child: RippleButton(
-                      onTap: () {
-                        context.read<TickTimerProvider>().resetTimer();
+                      onTap: () async {
+                        await scrollController
+                            .animateTo(
+                          scrollController.offset - 138.h(context),
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        )
+                            .then((value) {
+                          context.read<TickTimerProvider>().resetTimer();
+                        });
                       },
                       border: Border.all(
                         width: 2,

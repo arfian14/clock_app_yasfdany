@@ -114,7 +114,7 @@ class _TextAreaState extends State<TextArea> {
                       hintStyle: Themes(context).black14.apply(
                             color: widget.textColor != null
                                 ? widget.textColor.withOpacity(0.5)
-                                : Themes.black,
+                                : Themes.black.withOpacity(0.5),
                           ),
                     ),
                   ),

@@ -1,3 +1,4 @@
+import 'package:ClockApp/data/providers/alarm_provider.dart';
 import 'package:ClockApp/data/providers/tick_provider.dart';
 import 'package:ClockApp/data/providers/timezone_provider.dart';
 import 'package:ClockApp/ui/views/home/home_screen.dart';
@@ -16,6 +17,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => TickProvider()),
         ChangeNotifierProvider(create: (_) => TickTimerProvider()),
         ChangeNotifierProvider(create: (_) => TimezoneProvider()),
+        ChangeNotifierProvider(create: (_) => AlarmProvider()),
       ],
       child: MyApp(),
     ),

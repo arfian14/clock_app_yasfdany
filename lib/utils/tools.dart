@@ -4,10 +4,24 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_flexible_toast/flutter_flexible_toast.dart';
 // import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 // import 'package:timeago/timeago.dart' as timeago;
 
 class Tools {
+  static showToast({String text, Toast duration = Toast.LENGTH_SHORT}) {
+    FlutterFlexibleToast.showToast(
+      message: text,
+      toastLength: duration,
+      toastGravity: ToastGravity.BOTTOM,
+      radius: 24,
+      elevation: 10,
+      textColor: Colors.white,
+      backgroundColor: Colors.black,
+      timeInSeconds: 1,
+    );
+  }
+
   static Future<File> copyFileFromAssets(String path, String assetPath) async {
     final byteData = await rootBundle.load(assetPath);
 
