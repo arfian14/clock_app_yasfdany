@@ -2,7 +2,7 @@ import 'package:ClockApp/data/providers/tick_provider.dart';
 import 'package:ClockApp/ui/components/clockview.dart';
 import 'package:ClockApp/ui/views/home/pages/alarm_page.dart';
 import 'package:ClockApp/ui/views/home/pages/clock_page.dart';
-import 'package:ClockApp/ui/views/home/pages/timer_page.dart';
+import 'package:ClockApp/ui/views/home/pages/stopwatch_page.dart';
 import 'package:ClockApp/utils/responsive.dart';
 import 'package:ClockApp/utils/themes.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class _HomescreenState extends State<Homescreen> {
         },
         children: [
           ClockPage(),
-          TimePage(),
+          StopwatchPage(),
           AlarmPage(),
         ],
       ),
@@ -68,7 +68,7 @@ class _HomescreenState extends State<Homescreen> {
               Icons.timer_rounded,
               size: 28.f(context),
             ),
-            label: "Timer",
+            label: "Stopwatch",
           ),
           BottomNavigationBarItem(
             icon: Icon(

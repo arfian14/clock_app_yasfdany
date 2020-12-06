@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:ClockApp/data/models/lap.dart';
 import 'package:flutter/material.dart';
 
-class TickTimerProvider extends ChangeNotifier {
+class TickStopwatchProvider extends ChangeNotifier {
   DateTime dateTime;
   DateTime lapDateTime;
   int tick = 0;

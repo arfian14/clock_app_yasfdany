@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:ClockApp/data/models/lap.dart';
-import 'package:ClockApp/data/providers/tick_timer_provider.dart';
+import 'package:ClockApp/data/providers/tick_stopwatch_provider.dart';
 import 'package:ClockApp/ui/components/flat_card.dart';
 import 'package:ClockApp/ui/components/item_lap.dart';
 import 'package:ClockApp/ui/components/ripple_button.dart';
@@ -13,23 +13,24 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class TimePage extends StatefulWidget {
-  TimePage({Key key}) : super(key: key);
+class StopwatchPage extends StatefulWidget {
+  StopwatchPage({Key key}) : super(key: key);
 
   @override
-  _TimePageState createState() => _TimePageState();
+  _StopwatchPageState createState() => _StopwatchPageState();
 }
 
-class _TimePageState extends State<TimePage> with TickerProviderStateMixin {
+class _StopwatchPageState extends State<StopwatchPage>
+    with TickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    int tick = context.watch<TickTimerProvider>().tick;
-    bool isTicking = context.watch<TickTimerProvider>().isTicking;
-    List<Lap> laps = context.watch<TickTimerProvider>().laps;
+    int tick = context.watch<TickStopwatchProvider>().tick;
+    bool isTicking = context.watch<TickStopwatchProvider>().isTicking;
+    List<Lap> laps = context.watch<TickStopwatchProvider>().laps;
     GlobalKey<AnimatedListState> listKey =
-        context.watch<TickTimerProvider>().listKey;
+        context.watch<TickStopwatchProvider>().listKey;
 
     int milisecond = tick % 1000;
     int second = (tick ~/ 1000) % 60;
@@ -199,7 +200,7 @@ class _TimePageState extends State<TimePage> with TickerProviderStateMixin {
                           curve: Curves.easeIn,
                         )
                             .then((value) {
-                          context.read<TickTimerProvider>().resetTimer();
+                          context.read<TickStopwatchProvider>().resetTimer();
                         });
                       },
                       border: Border.all(
@@ -227,9 +228,9 @@ class _TimePageState extends State<TimePage> with TickerProviderStateMixin {
                   RippleButton(
                     onTap: () {
                       if (isTicking) {
-                        context.read<TickTimerProvider>().pauseTicking();
+                        context.read<TickStopwatchProvider>().pauseTicking();
                       } else {
-                        context.read<TickTimerProvider>().initTicking();
+                        context.read<TickStopwatchProvider>().initTicking();
                       }
                     },
                     radius: 32.w(context),
@@ -264,7 +265,7 @@ class _TimePageState extends State<TimePage> with TickerProviderStateMixin {
                     width: 24.wp(context),
                     child: RippleButton(
                       onTap: () async {
-                        context.read<TickTimerProvider>().addLap();
+                        context.read<TickStopwatchProvider>().addLap();
                         if (laps.length == 1) {
                           await scrollController.animateTo(
                             scrollController.offset + 138.h(context),

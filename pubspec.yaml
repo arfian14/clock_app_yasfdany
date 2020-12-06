@@ -26,6 +26,7 @@ dependencies:
   animated_background: ^1.0.5
   cupertino_icons: ^1.0.0
   flutter_flexible_toast: ^0.1.4
+  flutter_svg: ^0.19.1
   intl: ^0.16.1
   provider: ^4.3.2+2
   shared_preferences: ^0.5.12+4
@@ -46,8 +47,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # assets:
+  assets:
   # assets-generator-begin
+  # assets/images/*
+    - assets/images/sleep_illustration.svg
   # assets-generator-end
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

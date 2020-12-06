@@ -191,6 +191,7 @@ class _BottomsheetAddAlarmState extends State<BottomsheetAddAlarm> {
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 24.h(context)),
                         child: TimePickerSpinner(
+                          itemWidth: 56.w(context),
                           normalTextStyle: TextStyle(
                             fontFamily: "NExtraBold",
                             fontSize: 24.f(context),
