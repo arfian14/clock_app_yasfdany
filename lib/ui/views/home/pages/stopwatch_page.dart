@@ -75,7 +75,7 @@ class _StopwatchPageState extends State<StopwatchPage>
                             ),
                           ),
                           Text(
-                            "minutes",
+                            "menit",
                             style: Themes(context).whiteBold14,
                           ),
                         ],
@@ -91,7 +91,7 @@ class _StopwatchPageState extends State<StopwatchPage>
                             ),
                           ),
                           Text(
-                            "second",
+                            "detik",
                             style: Themes(context).whiteBold14,
                           ),
                         ],

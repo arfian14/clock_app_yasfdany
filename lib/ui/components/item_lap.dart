@@ -51,7 +51,7 @@ class ItemLap extends StatelessWidget {
                       style: Themes(context).whiteBold14,
                     ),
                     Text(
-                      DateFormat("mm:ss").format(
+                      DateFormat("mm:ss", "id").format(
                             DateTime.fromMillisecondsSinceEpoch(
                               lap.lap,
                             ),

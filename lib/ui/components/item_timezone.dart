@@ -57,7 +57,7 @@ class ItemTimezone extends StatelessWidget {
                           style: Themes(context).whiteBold16,
                         ),
                         Text(
-                          DateFormat("dd MMMM").format(
+                          DateFormat("dd MMMM", "id").format(
                             tz.TZDateTime.from(
                               dateTime,
                               tz.getLocation(timezone),
@@ -68,7 +68,7 @@ class ItemTimezone extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      DateFormat("HH:mm").format(
+                      DateFormat("HH:mm", "id").format(
                         tz.TZDateTime.from(
                           dateTime,
                           tz.getLocation(timezone),

@@ -118,7 +118,8 @@ class _ItemAlarmState extends State<ItemAlarm> with TickerProviderStateMixin {
                               style: Themes(context).whiteBold14,
                             ),
                             Text(
-                              DateFormat("HH:mm").format(widget.alarm.time),
+                              DateFormat("HH:mm", "id")
+                                  .format(widget.alarm.time),
                               style: Themes(context).whiteBold32,
                             ),
                             Wrap(

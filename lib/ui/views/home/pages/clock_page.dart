@@ -104,11 +104,11 @@ class _ClockPageState extends State<ClockPage> with TickerProviderStateMixin {
                   hourNeedleColor: Themes.white,
                 ).addMarginTop(18.hp(context)),
                 Text(
-                  DateFormat('HH:mm').format(dateTime),
+                  DateFormat('HH:mm', "id").format(dateTime),
                   style: Themes(context).whiteBold22,
                 ),
                 Text(
-                  DateFormat('dd MMMM yyyy').format(dateTime),
+                  DateFormat('dd MMMM yyyy', "id").format(dateTime),
                   style: Themes(context).white14,
                 ),
                 Column(
