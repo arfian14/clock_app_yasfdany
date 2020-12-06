@@ -287,40 +287,50 @@ class _BottomsheetAddAlarmState extends State<BottomsheetAddAlarm> {
                         color: Themes.stroke,
                       ),
                       Container(
+                        padding: EdgeInsets.all(18.w(context)),
                         alignment: Alignment.centerLeft,
-                        child: SingleChildScrollView(
-                          padding: EdgeInsets.all(18.w(context)),
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: colors.map((e) {
-                              return Container(
-                                width: 34.w(context),
-                                height: 34.w(context),
-                                child: RippleButton(
-                                  padding: EdgeInsets.zero,
-                                  radius: 32.w(context),
-                                  onTap: () {
-                                    setState(() {
-                                      for (AlarmColor alarmColor in colors) {
-                                        alarmColor.selected = false;
-                                      }
-                                      e.selected = true;
-                                    });
-                                  },
-                                  color: e.color,
-                                  child: Container(
-                                    child: e.selected
-                                        ? Icon(
-                                            Icons.check_rounded,
-                                            color: Colors.white,
-                                            size: 24.f(context),
-                                          )
-                                        : null,
-                                  ),
-                                ),
-                              ).addMarginRight(12.w(context));
-                            }).toList(),
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Pilih Warna",
+                              style: Themes(context).blackBold16,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: colors.map((e) {
+                                  return Container(
+                                    width: 34.w(context),
+                                    height: 34.w(context),
+                                    child: RippleButton(
+                                      padding: EdgeInsets.zero,
+                                      radius: 32.w(context),
+                                      onTap: () {
+                                        setState(() {
+                                          for (AlarmColor alarmColor
+                                              in colors) {
+                                            alarmColor.selected = false;
+                                          }
+                                          e.selected = true;
+                                        });
+                                      },
+                                      color: e.color,
+                                      child: Container(
+                                        child: e.selected
+                                            ? Icon(
+                                                Icons.check_rounded,
+                                                color: Colors.white,
+                                                size: 24.f(context),
+                                              )
+                                            : null,
+                                      ),
+                                    ),
+                                  ).addMarginRight(12.w(context));
+                                }).toList(),
+                              ),
+                            ).addMarginTop(14.h(context)),
+                          ],
                         ),
                       ),
                       Container(
