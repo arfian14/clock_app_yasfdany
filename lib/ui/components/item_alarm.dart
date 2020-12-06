@@ -67,22 +67,6 @@ class _ItemAlarmState extends State<ItemAlarm> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 Positioned.fill(
-                  child: AnimatedBackground(
-                    behaviour: RandomParticleBehaviour(
-                      options: ParticleOptions(
-                        baseColor: Colors.white,
-                        particleCount: 10,
-                        spawnMaxSpeed: 100,
-                        spawnMinSpeed: 10,
-                        minOpacity: 0.1,
-                        maxOpacity: 0.2,
-                      ),
-                    ),
-                    vsync: this,
-                    child: Container(),
-                  ),
-                ),
-                Positioned.fill(
                   bottom: 0,
                   child: Align(
                     alignment: Alignment.bottomCenter,
@@ -129,7 +113,7 @@ class _ItemAlarmState extends State<ItemAlarm> with TickerProviderStateMixin {
                                 return Text(
                                   e.substring(0, 1).toUpperCase() +
                                       e.substring(1),
-                                  style: Themes(context).whiteBold14,
+                                  style: Themes(context).white14,
                                 ).addMarginRight(12.w(context));
                               }).toList(),
                             )
