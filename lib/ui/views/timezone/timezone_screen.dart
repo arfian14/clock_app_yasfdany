@@ -5,6 +5,7 @@ import 'package:ClockApp/ui/components/textarea.dart';
 import 'package:ClockApp/utils/responsive.dart';
 import 'package:ClockApp/utils/themes.dart';
 import 'package:ClockApp/utils/widget_helper.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:timezone/standalone.dart' as tz;
@@ -86,76 +87,97 @@ class _TimezoneScreenState extends State<TimezoneScreen> {
                 width: 1,
               ),
               color: Themes.black.withOpacity(0.6),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(8.w(context)),
-                  onTap: () {
-                    if (!currentTimezone.contains(timezone.name)) {
-                      if (widget.timezone != null) {
-                        context
-                            .read<TimezoneProvider>()
-                            .replaceTimezone(widget.timezone, timezone.name);
-                      } else {
-                        context
-                            .read<TimezoneProvider>()
-                            .addTimezone(timezone.name);
-                      }
-
-                      Navigator.pop(context);
-                    } else {
-                      showGeneralDialog(
-                        transitionBuilder: (currentContext, a1, a2, widget) {
-                          final curvedValue =
-                              Curves.easeInOutBack.transform(a1.value) - 1.0;
-                          return Transform(
-                            transform: Matrix4.translationValues(
-                              0.0,
-                              curvedValue * 300,
-                              0.0,
-                            ),
-                            child: Opacity(
-                              opacity: a1.value,
-                              child: CustomAlertDialog(
-                                title: "Terjadi Kesalahan",
-                                message: "Timezone sudah ada",
-                                buttonText: "Ok",
-                                onConfirm: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                        transitionDuration: Duration(milliseconds: 200),
-                        barrierDismissible: true,
-                        barrierLabel: '',
-                        context: context,
-                        pageBuilder: (context, animation1, animation2) {},
-                      );
-                    }
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.all(14.w(context)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          timezone.name.replaceAll("/", ", "),
-                          style: Themes(context)
-                              .whiteBold14
-                              .apply(color: Colors.white.withOpacity(0.6)),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.w(context)),
+                      child: Opacity(
+                        opacity: 0.3,
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "https://source.unsplash.com/random/300×100/?${timezone.name.replaceAll("/", ",").replaceAll("_", " ")}",
+                          width: double.infinity,
+                          height: 56.h(context),
+                          fit: BoxFit.cover,
                         ),
-                        Text(
-                          timezone.currentTimeZone.abbr,
-                          style: Themes(context)
-                              .white14
-                              .apply(color: Colors.white.withOpacity(0.6)),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(8.w(context)),
+                      onTap: () {
+                        if (!currentTimezone.contains(timezone.name)) {
+                          if (widget.timezone != null) {
+                            context.read<TimezoneProvider>().replaceTimezone(
+                                widget.timezone, timezone.name);
+                          } else {
+                            context
+                                .read<TimezoneProvider>()
+                                .addTimezone(timezone.name);
+                          }
+
+                          Navigator.pop(context);
+                        } else {
+                          showGeneralDialog(
+                            transitionBuilder:
+                                (currentContext, a1, a2, widget) {
+                              final curvedValue =
+                                  Curves.easeInOutBack.transform(a1.value) -
+                                      1.0;
+                              return Transform(
+                                transform: Matrix4.translationValues(
+                                  0.0,
+                                  curvedValue * 300,
+                                  0.0,
+                                ),
+                                child: Opacity(
+                                  opacity: a1.value,
+                                  child: CustomAlertDialog(
+                                    title: "Terjadi Kesalahan",
+                                    message: "Timezone sudah ada",
+                                    buttonText: "Ok",
+                                    onConfirm: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                            transitionDuration: Duration(milliseconds: 200),
+                            barrierDismissible: true,
+                            barrierLabel: '',
+                            context: context,
+                            pageBuilder: (context, animation1, animation2) {},
+                          );
+                        }
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(14.w(context)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              timezone.name.replaceAll("/", ", "),
+                              style: Themes(context)
+                                  .whiteBold14
+                                  .apply(color: Colors.white.withOpacity(0.6)),
+                            ),
+                            Text(
+                              timezone.currentTimeZone.abbr,
+                              style: Themes(context)
+                                  .white14
+                                  .apply(color: Colors.white.withOpacity(0.6)),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ).addMarginOnly(
               top: 14.h(context),
