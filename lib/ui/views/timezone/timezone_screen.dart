@@ -161,7 +161,9 @@ class _TimezoneScreenState extends State<TimezoneScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              timezone.name.replaceAll("/", ", "),
+                              timezone.name
+                                  .replaceAll("/", ", ")
+                                  .replaceAll("_", " "),
                               style: Themes(context)
                                   .whiteBold14
                                   .apply(color: Colors.white.withOpacity(0.6)),
