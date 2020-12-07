@@ -66,21 +66,21 @@ class _HomescreenState extends State<Homescreen> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.access_time_rounded,
-              size: 28.f(context),
+              size: 24.f(context),
             ),
             label: "Jam",
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.timer_rounded,
-              size: 28.f(context),
+              size: 24.f(context),
             ),
             label: "Stopwatch",
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.alarm_rounded,
-              size: 28.f(context),
+              size: 24.f(context),
             ),
             label: "Alarm",
           )

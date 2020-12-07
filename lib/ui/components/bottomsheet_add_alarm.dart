@@ -110,8 +110,8 @@ class _BottomsheetAddAlarmState extends State<BottomsheetAddAlarm> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(14.w(context)),
-              topRight: Radius.circular(14.w(context)),
+              topLeft: Radius.circular(24.w(context)),
+              topRight: Radius.circular(24.w(context)),
             ),
           ),
           child: Column(
@@ -121,7 +121,7 @@ class _BottomsheetAddAlarmState extends State<BottomsheetAddAlarm> {
                 children: [
                   RippleButton(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 12.w(context),
+                      horizontal: 14.w(context),
                       vertical: 12.h(context),
                     ),
                     enableShadow: false,
@@ -137,7 +137,7 @@ class _BottomsheetAddAlarmState extends State<BottomsheetAddAlarm> {
                   ),
                   Text(
                     "Tambah Alarm",
-                    style: Themes(context).blackBold18,
+                    style: Themes(context).blackBold16,
                   ),
                   RippleButton(
                     padding: EdgeInsets.symmetric(
