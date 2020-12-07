@@ -8,6 +8,7 @@ import 'package:ClockApp/utils/widget_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:parallax_image/parallax_image.dart';
 import 'package:timezone/standalone.dart' as tz;
 import 'package:provider/provider.dart';
 
@@ -94,12 +95,11 @@ class _TimezoneScreenState extends State<TimezoneScreen> {
                       borderRadius: BorderRadius.circular(8.w(context)),
                       child: Opacity(
                         opacity: 0.3,
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              "https://source.unsplash.com/random/300×100/?${timezone.name.replaceAll("/", ",").replaceAll("_", " ")}",
-                          width: double.infinity,
-                          height: 56.h(context),
-                          fit: BoxFit.cover,
+                        child: ParallaxImage(
+                          image: CachedNetworkImageProvider(
+                            "https://source.unsplash.com/random/300×100/?${timezone.name.replaceAll("/", ",").replaceAll("_", " ")}",
+                          ),
+                          extent: 100,
                         ),
                       ),
                     ),
