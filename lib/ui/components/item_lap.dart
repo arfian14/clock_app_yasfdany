@@ -31,6 +31,7 @@ class ItemLap extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
+          splashColor: Themes.white.withOpacity(0.3),
           borderRadius: BorderRadius.circular(12.w(context)),
           onTap: onTap,
           child: ClipRRect(

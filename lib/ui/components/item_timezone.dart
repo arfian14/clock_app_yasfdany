@@ -35,6 +35,7 @@ class ItemTimezone extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(12.w(context)),
           onLongPress: onLongTap,
+          splashColor: Themes.white.withOpacity(0.3),
           onTap: onTap,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12.w(context)),

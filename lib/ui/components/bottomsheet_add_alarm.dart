@@ -101,9 +101,13 @@ class _BottomsheetAddAlarmState extends State<BottomsheetAddAlarm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+    return Container(
+      margin: EdgeInsets.only(
+        top: 32.h(context),
+      ),
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
       child: Material(
         color: Colors.transparent,
         child: Container(
@@ -411,7 +415,7 @@ class _BottomsheetAddAlarmState extends State<BottomsheetAddAlarm> {
             ],
           ),
         ),
-      ).addMarginTop(32.h(context)),
+      ),
     );
   }
 }

@@ -113,12 +113,10 @@ class _ItemAlarmState extends State<ItemAlarm> with TickerProviderStateMixin {
                                 return Text(
                                   e.substring(0, 1).toUpperCase() +
                                       e.substring(1),
-                                  style: Themes(context).white14,
+                                  style: Themes(context).white12,
                                 ).addMarginRight(12.w(context));
                               }).toList(),
-                            )
-                                .addMarginTop(6.h(context))
-                                .addMarginRight(36.w(context)),
+                            ).addMarginRight(36.w(context)),
                           ],
                         ),
                       ),
