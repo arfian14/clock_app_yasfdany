@@ -38,8 +38,8 @@ class _TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
     int curretTimer = context.watch<TickTimerProvider>().timer -
         context.watch<TickTimerProvider>().tick;
 
-    int second = Duration(milliseconds: curretTimer).inSeconds;
-    int minutes = Duration(milliseconds: curretTimer).inMinutes;
+    int second = Duration(milliseconds: curretTimer).inSeconds % 60;
+    int minutes = Duration(milliseconds: curretTimer).inMinutes % 60;
     int hour = Duration(milliseconds: curretTimer).inHours;
 
     if (pageController.hasClients) {
