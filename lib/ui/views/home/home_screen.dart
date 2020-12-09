@@ -3,6 +3,7 @@ import 'package:ClockApp/ui/components/clockview.dart';
 import 'package:ClockApp/ui/views/home/pages/alarm_page.dart';
 import 'package:ClockApp/ui/views/home/pages/clock_page.dart';
 import 'package:ClockApp/ui/views/home/pages/stopwatch_page.dart';
+import 'package:ClockApp/ui/views/home/pages/timer_page.dart';
 import 'package:ClockApp/utils/responsive.dart';
 import 'package:ClockApp/utils/themes.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _HomescreenState extends State<Homescreen> {
           SystemChrome.setSystemUIOverlayStyle(
             SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
-              statusBarIconBrightness: (index == 0 || index == 1)
+              statusBarIconBrightness: (index == 0 || index == 1 || index == 2)
                   ? Brightness.light
                   : Brightness.dark,
             ),
@@ -49,6 +50,7 @@ class _HomescreenState extends State<Homescreen> {
         children: [
           ClockPage(),
           StopwatchPage(),
+          TimerPage(),
           AlarmPage(),
         ],
       ),
@@ -62,6 +64,7 @@ class _HomescreenState extends State<Homescreen> {
         selectedLabelStyle: Themes(context).primaryBold12,
         unselectedLabelStyle: Themes(context).black12,
         currentIndex: page,
+        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -76,6 +79,13 @@ class _HomescreenState extends State<Homescreen> {
               size: 24.f(context),
             ),
             label: "Stopwatch",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.hourglass_bottom_rounded,
+              size: 24.f(context),
+            ),
+            label: "Timer",
           ),
           BottomNavigationBarItem(
             icon: Icon(

@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 import 'data/providers/tick_stopwatch_provider.dart';
+import 'data/providers/tick_timer_provider.dart';
 
 void main() {
   tz.initializeTimeZones();
@@ -18,6 +19,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => TickStopwatchProvider()),
         ChangeNotifierProvider(create: (_) => TimezoneProvider()),
         ChangeNotifierProvider(create: (_) => AlarmProvider()),
+        ChangeNotifierProvider(create: (_) => TickTimerProvider()),
       ],
       child: MyApp(),
     ),

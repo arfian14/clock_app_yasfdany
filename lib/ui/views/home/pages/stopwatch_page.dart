@@ -33,8 +33,8 @@ class _StopwatchPageState extends State<StopwatchPage>
         context.watch<TickStopwatchProvider>().listKey;
 
     int milisecond = tick % 1000;
-    int second = (tick ~/ 1000) % 60;
-    int minutes = (tick ~/ 1000) ~/ 60;
+    int second = Duration(milliseconds: tick).inSeconds;
+    int minutes = Duration(milliseconds: tick).inMinutes;
 
     return Scaffold(
       body: Stack(
